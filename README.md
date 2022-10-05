@@ -13,7 +13,7 @@ NFTKastle is an NFT marketplace where users can mint their pictures as NFTs, lis
 - Javascript (NextJs & Testing)
 - Ethers (Blockchain Interaction)
 - hardhat (Development Framework)
-- AWS (Hosting and Database)
+- Sanity (Database)
 - IPFS (File hosting)
 
 # ⛓ Blockchain Protocol used
@@ -45,7 +45,6 @@ $ npm install
 You can find all the required environment variables for the frontend in the `.env.local.Example` file
 
 ```
-NEXT_PUBLIC_ProjectID =   // Infura ProjectID
 NEXT_PUBLIC_INFURA_IPFS_PROJECT_SECRET = // Infura IPFS Project secret
 NEXT_PUBLIC_INFURA_IPFS_PROJECT_ID =  // Infura IPFS Project ID
 
@@ -71,7 +70,7 @@ npm run dev
 npx hardhat test
 ```
 
-- Note :- This app was deploy to Polygon Mumbai testnet, so you need to connect your wallet to Mumbai testnet before you can Interact with the app.
+- Note :- This app was deploy to Klaytn testnet (Baobab), so you need to connect your wallet to Klaytn testnet (Baobab) before you can Interact with the app.
 
 # Contract address
 
@@ -79,7 +78,7 @@ npx hardhat test
 0x255D2839bc54710de6aACB01c711420132d17616
 ```
 
-# ✔ Verified Smart Contract address
+# ✔ Contract address verified on Klaytn testnet
 
 ```
 https://baobab.scope.klaytn.com/account/0x255D2839bc54710de6aACB01c711420132d17616?tabId=internalTx
