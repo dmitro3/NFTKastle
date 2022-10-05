@@ -12,7 +12,7 @@ import Link from "next/link";
 import { Button } from "@chakra-ui/react";
 
 const Home = () => {
-  const { fetchNFTs } = useContext(NFTContext);
+  const { fetchNFTs, currentAccount } = useContext(NFTContext);
   const [nfts, setNfts] = useState([]);
   const [nftsCopy, setNftsCopy] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -31,7 +31,7 @@ const Home = () => {
       setNftsCopy(items);
       setIsLoading(false);
     });
-  }, []);
+  }, [currentAccount]);
 
   useEffect(() => {
     const sortedNfts = [...nfts];

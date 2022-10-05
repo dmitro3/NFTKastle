@@ -28,12 +28,12 @@ const Stake = () => {
   const [activeSelect, setActiveSelect] = useState("Recently Added");
   const [balance, setBalance] = useState(0);
 
-  const matic = {
-    name: "matic",
-    chainId: 137,
+  const klay = {
+    name: "klay",
+    chainId: 1001,
     _defaultProvider: (providers) =>
       new providers.JsonRpcProvider(
-        `https://polygon-mumbai.infura.io/v3/${process.env.NEXT_PUBLIC_ProjectID}`
+        `https://api.baobab.klaytn.net:8651`
       ),
   };
 
@@ -72,7 +72,7 @@ const Stake = () => {
 
   const getUserBalance = async () => {
     try {
-      const provider = ethers.getDefaultProvider(matic);
+      const provider = ethers.getDefaultProvider(klay);
       const balance = await provider.getBalance(currentAccount);
       setBalance(ethers.utils.formatEther(balance.toString()));
     } catch (error) {
@@ -148,7 +148,7 @@ const Stake = () => {
             className="text-nft-black-1 dark:text-nft-gray-2 border-nft-gray-1"
           >
             {fixed ? amount?.toFixed(9) : Number.parseFloat(amount).toFixed(3)}{" "}
-            Matic
+             KLAY
           </Text>
         </Box>
       </Flex>
