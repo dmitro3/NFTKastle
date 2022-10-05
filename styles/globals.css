@@ -152,7 +152,7 @@
 }
 
 /* ui for game *********************************************************/
-  
+
 .app-wrapper {
   margin: 0;
   padding: 0;
@@ -187,7 +187,7 @@
   left: 43%;
   bottom: 0vw;
   background-size: cover;
-  background-image: url('../img/bike.png');
+  background-image: url("../img/bike.png");
 }
 .rock {
   width: 14%;
@@ -204,13 +204,13 @@
 .right {
   right: 4%;
   bottom: 4%;
-  background-image: url('../img/right-btn.png');
+  background-image: url("../img/right-btn.png");
   background-size: contain;
 }
 .left {
   left: 4%;
   bottom: 4%;
-  background-image: url('../img/left-btn.png');
+  background-image: url("../img/left-btn.png");
   background-size: contain;
 }
 .scoreboard {
@@ -279,7 +279,7 @@
   height: 40%;
 }
 .start-screen {
-  background-image: url('../img/startpage-bg.png');
+  background-image: url("../img/startpage-bg.png");
   background-size: cover;
   display: flex;
   justify-content: center;
@@ -292,7 +292,7 @@
 .start-btn {
   bottom: 0;
   cursor: pointer;
-  background-image: url('../img/play-btn.png');
+  background-image: url("../img/play-btn.png");
   background-color: black;
   background-repeat: no-repeat;
   border: blueviolet;
@@ -310,12 +310,12 @@
   background-color: white;
 }
 .game-over-screen {
-  background-image: url('../img/gameover-bg.png');
+  background-image: url("../img/gameover-bg.png");
   background-size: cover;
 }
 .retry-btn {
   cursor: pointer;
-  background-image: url('../img/retry-btn.png');
+  background-image: url("../img/retry-btn.png");
   background-color: black;
   border: blueviolet;
   border-style: solid;
@@ -383,8 +383,8 @@
   font-weight: 900;
 }
 
-.css-pbt187{
-  background: #3198FE;
+.css-pbt187 {
+  background: #3198fe;
 }
 .swiper {
   width: 100%;

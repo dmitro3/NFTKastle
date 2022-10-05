@@ -32,9 +32,7 @@ const Stake = () => {
     name: "klay",
     chainId: 1001,
     _defaultProvider: (providers) =>
-      new providers.JsonRpcProvider(
-        `https://api.baobab.klaytn.net:8651`
-      ),
+      new providers.JsonRpcProvider(`https://api.baobab.klaytn.net:8651`),
   };
 
   useEffect(() => {
@@ -148,7 +146,7 @@ const Stake = () => {
             className="text-nft-black-1 dark:text-nft-gray-2 border-nft-gray-1"
           >
             {fixed ? amount?.toFixed(9) : Number.parseFloat(amount).toFixed(3)}{" "}
-             KLAY
+            KLAY
           </Text>
         </Box>
       </Flex>

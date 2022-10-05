@@ -1,21 +1,25 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { NFTContext } from '../context/NFTContext';
-import { shortenAddress } from '../utils/shortenAddress';
+import React, { useContext, useEffect, useState } from "react";
+import { NFTContext } from "../context/NFTContext";
+import { shortenAddress } from "../utils/shortenAddress";
 import { TwitterShareButton } from "react-twitter-embed";
-import { Loader } from '../components';
-import uniqid from 'uniqid';
-import { client } from '../lib/sanityClient';
-import $ from 'jquery';
-import bike from '../img/hero-car.png';
-import car from '../img/car.png';
-import { Button, useToast, Table,
+import { Loader } from "../components";
+import uniqid from "uniqid";
+import { client } from "../lib/sanityClient";
+import $ from "jquery";
+import bike from "../img/hero-car.png";
+import car from "../img/car.png";
+import {
+  Button,
+  useToast,
+  Table,
   Thead,
   Tbody,
   Tr,
   Th,
   Td,
-  TableContainer, } from '@chakra-ui/react';
-import Head from 'next/head';
+  TableContainer,
+} from "@chakra-ui/react";
+import Head from "next/head";
 
 const Wrong_side = () => {
   const { game, currentAccount } = useContext(NFTContext);
@@ -33,24 +37,24 @@ const Wrong_side = () => {
   // round start
   function start() {
     score = 0;
-    const node = document.getElementsByClassName('bike');
-    if (game !== '') {
+    const node = document.getElementsByClassName("bike");
+    if (game !== "") {
       node[0].src = game;
     } else {
       node[0].src = bike.src;
     }
 
-    $('.dl').addClass('road-animation');
-    $('.dr').addClass('road-animation');
+    $(".dl").addClass("road-animation");
+    $(".dr").addClass("road-animation");
     gameRunningInterval = setInterval(() => {
-      $('.rock').removeClass('start-game');
+      $(".rock").removeClass("start-game");
       rockPosition = Math.floor(Math.random() * 3);
-      $('.rock').css('left', 29 + rockPosition * 14 + '%');
-      $('.rock').addClass('start-game');
+      $(".rock").css("left", 29 + rockPosition * 14 + "%");
+      $(".rock").addClass("start-game");
     }, 1500);
     gameScoreInterval = setInterval(() => {
       score++;
-      $('.score-text').text(score);
+      $(".score-text").text(score);
       checkGameOver();
     }, 100);
   }
@@ -60,12 +64,12 @@ const Wrong_side = () => {
     const query = `*[_type == "users"] {
        walletAddress,
        score
-    }`
+    }`;
     const data = await client.fetch(query);
 
-    setTopScores(data.sort((a, b) => a.score - b.score).reverse())
+    setTopScores(data.sort((a, b) => a.score - b.score).reverse());
     setLoading(false);
-  }
+  };
 
   useEffect(() => {
     fetchCollectionData();
@@ -75,26 +79,26 @@ const Wrong_side = () => {
   async function endGame() {
     clearInterval(gameRunningInterval);
     clearInterval(gameScoreInterval);
-    $('.game-screen').addClass('hide');
-    $('.game-over-screen').removeClass('hide');
-    $('.final-score').text(score);
-    if(currentAccount){
+    $(".game-screen").addClass("hide");
+    $(".game-over-screen").removeClass("hide");
+    $(".final-score").text(score);
+    if (currentAccount) {
       const userDoc = {
-        _type: 'users',
+        _type: "users",
         _id: uniqid(),
         walletAddress: currentAccount,
         score: `${score}`,
-      }
-      const result = await client.createIfNotExists(userDoc)
+      };
+      const result = await client.createIfNotExists(userDoc);
     }
     if (score) {
       toast({
-        title: 'Congratulations 🎉',
+        title: "Congratulations 🎉",
         description: `Your score is ${score}`,
-        status: 'success',
+        status: "success",
         duration: 9000,
         isClosable: true,
-        position: 'bottom-right',
+        position: "bottom-right",
       });
       fetchCollectionData();
       //$('.claim').removeClass('hide');
@@ -108,7 +112,7 @@ const Wrong_side = () => {
       currentLane--;
       carPosition[currentLane] = 1;
     }
-    $('.bike').css('left', 29 + currentLane * 14 + '%');
+    $(".bike").css("left", 29 + currentLane * 14 + "%");
     // console.log(carPosition);
   }
 
@@ -119,7 +123,7 @@ const Wrong_side = () => {
       currentLane++;
       carPosition[currentLane] = 1;
     }
-    $('.bike').css('left', 29 + currentLane * 14 + '%');
+    $(".bike").css("left", 29 + currentLane * 14 + "%");
     // console.log(carPosition);
     // console.log(carPosition);
   }
@@ -127,11 +131,11 @@ const Wrong_side = () => {
   //check if game over
   function checkGameOver() {
     if (rockPosition == currentLane) {
-      var rockTop = parseInt($('.rock').css('top'));
-      var bikeTop = parseInt($('.bike').css('top'));
+      var rockTop = parseInt($(".rock").css("top"));
+      var bikeTop = parseInt($(".bike").css("top"));
       if (rockTop - bikeTop > -70 && rockTop - bikeTop < 20) {
-        $('.dl').removeClass('road-animation');
-        $('.dr').removeClass('road-animation');
+        $(".dl").removeClass("road-animation");
+        $(".dr").removeClass("road-animation");
         endGame();
       }
     }
@@ -146,16 +150,16 @@ const Wrong_side = () => {
   }
   function onStartBtnClicked() {
     if (valid) {
-      $('.start-screen').addClass('hide');
-      $('.game-screen').removeClass('hide');
+      $(".start-screen").addClass("hide");
+      $(".game-screen").removeClass("hide");
       start();
     }
   }
   function onRetryBtnClick() {
     start();
-    $('.game-screen').removeClass('hide');
-    $('.game-over-screen').addClass('hide');
-    $('.claim').addClass('hide');
+    $(".game-screen").removeClass("hide");
+    $(".game-over-screen").addClass("hide");
+    $(".claim").addClass("hide");
   }
 
   return (
@@ -213,7 +217,7 @@ const Wrong_side = () => {
                       text: "NFTCity wrong side game",
                     }}
                   />
-              </div>
+                </div>
               </div>
             </div>
           </div>
@@ -233,14 +237,14 @@ const Wrong_side = () => {
               backgroundColor="#915bff"
               border="1px solid #915bff"
               _hover={{
-                backgroundColor: '#000',
-                border: '1px solid #915bff',
-                color: 'white',
+                backgroundColor: "#000",
+                border: "1px solid #915bff",
+                color: "white",
               }}
               display="inline-flex"
               alignItems="center"
               justifyContent="center"
-              w={{ base: 'full', sm: 'auto' }}
+              w={{ base: "full", sm: "auto" }}
               mb={{ base: 2, sm: 0 }}
               size="lg"
               cursor="pointer"
@@ -251,32 +255,41 @@ const Wrong_side = () => {
           </div>
         </div>
         <div className="ml-4 sm:ml-0 sm:p-2 p-0 sm:mt-4 mt-0 w-[400px] sm:w-full">
-          <h1 className="text-bold dark:text-white text-nft-black-1 text-2xl">Leader Board</h1>
-          {!loading ? <TableContainer>
-            <Table colorScheme='blue'>
-              <Thead>
-                <Tr className='dark:text-white text-nft-black-1'>
-                  <Th className='dark:text-white text-nft-black-1'>Player</Th>
-                  <Th className='dark:text-white text-nft-black-1'>Position</Th>
-                  <Th className='dark:text-white text-nft-black-1' isNumeric>Score</Th>
-                </Tr>
-              </Thead>
-              <Tbody className="text-bold dark:text-white text-nft-black-1">
-                {topScores.slice(0, 5).map((score, index) => {
-                  return (
-                    <Tr>
-                      <Td>{shortenAddress(score.walletAddress)}</Td>
-                      <Td>#{index + 1}</Td>
-                      <Td isNumeric>{score.score}</Td>
-                    </Tr>
-                  )
-                })}    
-              </Tbody>
-            </Table>
-          </TableContainer>
-          : <div className="flex justify-center w-full items-center">
+          <h1 className="text-bold dark:text-white text-nft-black-1 text-2xl">
+            Leader Board
+          </h1>
+          {!loading ? (
+            <TableContainer>
+              <Table colorScheme="blue">
+                <Thead>
+                  <Tr className="dark:text-white text-nft-black-1">
+                    <Th className="dark:text-white text-nft-black-1">Player</Th>
+                    <Th className="dark:text-white text-nft-black-1">
+                      Position
+                    </Th>
+                    <Th className="dark:text-white text-nft-black-1" isNumeric>
+                      Score
+                    </Th>
+                  </Tr>
+                </Thead>
+                <Tbody className="text-bold dark:text-white text-nft-black-1">
+                  {topScores.slice(0, 5).map((score, index) => {
+                    return (
+                      <Tr>
+                        <Td>{shortenAddress(score.walletAddress)}</Td>
+                        <Td>#{index + 1}</Td>
+                        <Td isNumeric>{score.score}</Td>
+                      </Tr>
+                    );
+                  })}
+                </Tbody>
+              </Table>
+            </TableContainer>
+          ) : (
+            <div className="flex justify-center w-full items-center">
               <Loader />
-            </div>}
+            </div>
+          )}
         </div>
       </div>
     </div>

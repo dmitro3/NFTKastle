@@ -10,7 +10,7 @@ module.exports = {
       chainId: 1337,
     },
     testnet: {
-      url: 'https://api.baobab.klaytn.net:8651', // baobab testnet
+      url: "https://api.baobab.klaytn.net:8651", // baobab testnet
       accounts: [process.env.PrivateKey], // add the account that will deploy the contract (private key)
     },
   },
